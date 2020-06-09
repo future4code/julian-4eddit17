@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Post = styled.div`
   width: 50%;
@@ -15,18 +15,25 @@ const Post = styled.div`
   
 `
 
-
-
 const FeedPage = () => {
     const HomePage = useHistory(); 
     const PostPage = useHistory();    
 
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+  
+      if(token === null){
+        HomePage.push("/")
+      }
+    },[HomePage]);
+
     const goToHomePage = () => {
         HomePage.push("/")
-    }
+    };
     const goToPostPage = () => {
     PostPage.push("/feed-page/post")
-    }  
+    }; 
+    
 
   return (
     <div>
