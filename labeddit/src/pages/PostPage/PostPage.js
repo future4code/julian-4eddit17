@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 
@@ -15,11 +15,17 @@ const Post = styled.div`
   
 `
 
-
-
 const PostPage = () => {
     const HomePage = useHistory();
     const FeedPage = useHistory();  
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+    
+        if(token === null){
+          HomePage.push("/")
+        }
+      },[HomePage])
 
     const goToHomePage = () => {
         HomePage.push("/")
@@ -28,21 +34,20 @@ const PostPage = () => {
     FeedPage.push("/feed-page/")
     }  
 
-  return (    
+    return (    
         <div>
             <h2>Página do Post</h2>
             <Post>
                 <div>
                 post post post post
                 </div>
-            <div>
-                <button onClick={goToFeedPage}>Voltar para Página dos Feeds</button>                
-            </div>                    
-        </Post>
+                <div>
+                    <button onClick={goToFeedPage}>Voltar para Página dos Feeds</button>                
+                </div>                    
+            </Post>
             <button onClick={goToHomePage}>Sair</button>
-        </div>
+        </div>  
 
-   
   );
 }
 
