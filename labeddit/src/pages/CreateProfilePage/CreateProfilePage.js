@@ -9,7 +9,8 @@ const CreateProfileContainer = styled.div`
   margin-left: auto;
   margin-right: auto;  
   text-align: center;
-  color:black;
+  background-color: #faf6e9;
+  height:90vh;
   button{
     padding: 1%;
     width: 10vw;
@@ -25,37 +26,56 @@ const AppBarContainer = styled.div`
   align-items: center;
   padding: 0 1rem;  
   min-width: 60%;
-  
+  :hover{
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+            transition: 3s;
+            border-radius: 100px;
+            background-color: #ece8d9;
+          }
 `
-
-const Button = styled.button`  
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid red;
-  color: red;  
-  padding: 1rem 1rem;
-  margin: auto 1rem;  
-  :hover {
-    color: #00FF00;
-    border: 4px solid #00FF00;    
-  }
+const H1Title = styled.h1`
+  font-size: 30px;
+  font-family: 'Yeseva One', cursive;
+  color: black;
+  width: 100%;
+        :hover
+            {
+                   /*Ainda to pensando em algumas animações pra 
+                   colocar aqui*/
+            }
 `
 
 const Input = styled.input`
   display:flex;
-  font-size: 1rem;
-  font-size: 1rem;
+  font-size: 0.88rem;
   background: transparent;
-  border-radius: 3px;
-  border: 2px solid red;
+  border-radius: 28px;
+  border: 1px solid #ece8d9;
   color: black;  
   padding: 1rem 1rem;
   margin: 1rem auto;
+  text-align: center;
+  width: 300px;
    
   :hover {
-    color: blue;
-    border: 4px solid #00FF00;
-  }   
+    color: black;
+    border: 1px solid #cf7500;
+    transition: 3s;
+  }     
+`
+
+const StyledButton = styled.button`
+ width:10vw;
+  background-color: #cf7500;
+  border-radius: 28px;
+  border: 1px solid #cf7500;
+  color: black;  
+  padding: 1rem 1rem;
+  margin: auto;  
+  :hover {
+    color: #ece8d9;
+    transition: 1s;  
+  }
 `
 
 const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit'
@@ -96,7 +116,7 @@ const CreateProfilePage = () => {
 
   return (
     <CreateProfileContainer>
-        <h1>Area de cadastro de usuario</h1>
+        <H1Title>Sign in </H1Title>
         <AppBarContainer>
             <form onSubmit={handleSubmit}>            
                 <Input
@@ -122,11 +142,11 @@ const CreateProfilePage = () => {
                     type='password'
                     required
                 />            
-                <Button onClick={ handleSingUp }>Criar Perfil</Button>        
+                <StyledButton onClick={ handleSingUp }>Criar Perfil</StyledButton>        
             </form>
     </AppBarContainer>    
          
-     <button onClick={goToHomePage}>Voltar pra Home</button>
+     <StyledButton onClick={goToHomePage}>homepage</StyledButton>
 
     </CreateProfileContainer>
   );

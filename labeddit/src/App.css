@@ -1,6 +1,13 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 .App {
   text-align: center;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 
 .App-logo {
   height: 40vmin;

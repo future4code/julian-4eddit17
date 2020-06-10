@@ -1,70 +1,76 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+import styled /*{Keyframes}*/ from 'styled-components';
 import axios from 'axios';
 
-const HomePageContainer = styled.div` 
-  padding: 3%;  
+const HomePageContainer = styled.div`  
   display:grid;
   margin-left: auto;
   margin-right: auto;  
   text-align: center;
-  color:black;
-  
+  background-color: #faf6e9;
+  margin:0;  
+  height:100vh;
   `
-const ButtonCad = styled.button`  
-  background-color: pink;
-  padding: 1%;
-  width: 10vw;
-  margin-top: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-    :hover {
-      color: green;
-      border: 4px solid #00FF00;   
-    }
-` 
+
+const H1Title = styled.h1`
+  font-size: 50px;
+  font-family: 'Yeseva One', cursive;
+  color: black;
+  width: 100%;
+        :hover
+            {
+                   /*Ainda to pensando em algumas animações pra 
+                   colocar aqui*/
+            }
+`
 
 const FormContainer = styled.form`
   width: 50vw;
-  background-color: #fcfa96;
-  padding: 3%;    
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+  padding: 3%;   
   display:grid;
   margin-left: auto;
   margin-right: auto;  
   text-align: center;
   color:black;
+    :hover{
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+            transition: 3s;
+            border-radius: 100px;
+            background-color: #ece8d9;
+          }
   `
 
 const Input = styled.input`
   display:flex;
-  font-size: 1rem;
-  font-size: 1rem;
+  font-size: 0.88rem;
   background: transparent;
-  border-radius: 3px;
-  border: 2px solid red;
+  border-radius: 28px;
+  border: 1px solid #ece8d9;
   color: black;  
   padding: 1rem 1rem;
   margin: 1rem auto;
+  width: 500px;
+  text-align: center;
    
   :hover {
-    color: blue;
-    border: 4px solid #00FF00;
+    color: black;
+    border: 1px solid #cf7500;
+    transition: 3s;
   }   
 `
 
 const Button = styled.button`  
   width:10vw;
-  background: orange;
-  border-radius: 3px;
-  border: 2px solid red;
+  background-color: #cf7500;
+  border-radius: 28px;
+  border: 1px solid #cf7500;
   color: black;  
   padding: 1rem 1rem;
   margin: auto;  
   :hover {
-    color: green;
-    border: 4px solid #00FF00;    
+    color: #ece8d9;
+    transition: 1s;  
   }
 `
 
@@ -109,7 +115,7 @@ const HomePage = () => {
         
   return (
     <HomePageContainer>
-      <h1>LabEddit</h1>
+      <H1Title>LABEDDIT</H1Title>
       <FormContainer onSubmit={handleSubmit}>
         <Input
           value={email}
@@ -124,11 +130,11 @@ const HomePage = () => {
           onChange={e => setPassword(e.target.value)}
           type='password'
           required          
-        />        
-        <Button onClick={ handleLogin }>logar</Button>
-      </FormContainer>    
-      <Button onClick={ handleLogout }>logout</Button>      
-      <ButtonCad onClick={goToCreateProfilePage}>Novo Cadastro</ButtonCad>      
+        /> 
+        <Button onClick={ handleLogin }>login</Button>       
+      </FormContainer>   
+      <Button onClick={goToCreateProfilePage}>Sign in</Button>  
+        <Button onClick={ handleLogout }>logout</Button>      
     </HomePageContainer>
   );
 }
