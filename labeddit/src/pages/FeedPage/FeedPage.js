@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import CreatePost from './components/CreatPost';
+import FormCreateNewPost from './components/FormCreateNewPost';
 
 const Post = styled.div`
   width: 50%;
@@ -11,33 +13,52 @@ const Post = styled.div`
   box-shadow: 0 2px 7px 0 rgba(0,0,0,0.15);
   display: flex;
   padding: 15px;
-  text-align: center;
-  
+  text-align: center;  
 `
 
-const FeedPage = () => {
-    const HomePage = useHistory(); 
-    const PostPage = useHistory();    
+const FeedPage = () => {  
+  const [selectedArea, setSelectedAre] = useState(false) 
 
-    useEffect(() => {
-      const token = localStorage.getItem('token');
+  const HomePage = useHistory(); 
+  const PostPage = useHistory();    
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if(token === null){
+      HomePage.push("/")
+    }
+  },[HomePage]);
   
-      if(token === null){
-        HomePage.push("/")
-      }
-    },[HomePage]);
-
-    const goToHomePage = () => {
-        HomePage.push("/")
-    };
-    const goToPostPage = () => {
-    PostPage.push("/feed-page/post")
-    }; 
-    
-
+  const goToHomePage = () => {
+      HomePage.push("/")
+  };
+  const goToPostPage = () => {
+  PostPage.push("/feed-page/post")
+  };
+  
+  const createNewPostArea = () => {
+    switch(selectedArea) {
+      case false: 
+        return <CreatePost goToAreaOfNewPost={goToAreaOfNewPost}/>     
+      case true:
+        return <FormCreateNewPost goToTitleCreatePost={goToTitleCreatePost}/> 
+      default:
+        return <CreatePost/>    
+    }
+  }
+  const goToAreaOfNewPost = () => {
+    setSelectedAre(true)
+  }    
+  const goToTitleCreatePost = () => {
+    setSelectedAre(false)
+  }
+  
   return (
     <div>
         <h2>Página de Feed</h2>
+        <h3 >Criar post</h3>
+        {createNewPostArea()}
      <button onClick={goToHomePage}>Sair</button>
 
      <Post>
