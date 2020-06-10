@@ -21,7 +21,7 @@ const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit'
 const PostPage = () => {
     const HomePage = useHistory();
     const FeedPage = useHistory(); 
-    /* const [getPost, setGetPost] = useState([]) */
+    const [getPost, setGetPost] = useState([])
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -31,16 +31,21 @@ const PostPage = () => {
         }
       },[HomePage])
 
-    const getPost = async () =>{
-      try{
-        const response = await axios.get(`${baseUrl}`)
-        localStorage.getItem('token', response.data.token)
-        console.log(response)
-      }
-      catch(e){
-        console.log('deu ruim')
-      }
-    }
+    
+    useEffect(() => {
+      axios.get(`${baseUrl}/posts`, {
+        headers:{
+          Authorization: localStorage.getItem('token')
+        }
+      })
+      .then(response=>{
+        localStorage.getItem('token')
+        console.log(response.data.posts)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },[])
     
 
     const goToHomePage = () => {
@@ -55,7 +60,7 @@ const PostPage = () => {
             <h2>Página do Post</h2>
             <Post>
                 <div>
-                Post
+                      post
                 </div>
                 
                 <div>
