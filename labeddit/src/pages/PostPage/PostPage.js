@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 
+import axios from 'axios'
+
 const Post = styled.div`
   width: 50%;
   height: 50%;
@@ -14,10 +16,12 @@ const Post = styled.div`
   text-align: center;
   
 `
+const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit'
 
 const PostPage = () => {
     const HomePage = useHistory();
-    const FeedPage = useHistory();  
+    const FeedPage = useHistory(); 
+    /* const [getPost, setGetPost] = useState([]) */
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -26,6 +30,18 @@ const PostPage = () => {
           HomePage.push("/")
         }
       },[HomePage])
+
+    const getPost = async () =>{
+      try{
+        const response = await axios.get(`${baseUrl}`)
+        localStorage.getItem('token', response.data.token)
+        console.log(response)
+      }
+      catch(e){
+        console.log('deu ruim')
+      }
+    }
+    
 
     const goToHomePage = () => {
         HomePage.push("/")
@@ -39,9 +55,11 @@ const PostPage = () => {
             <h2>Página do Post</h2>
             <Post>
                 <div>
-                post post post post
+                Post
                 </div>
+                
                 <div>
+                  <br></br><br></br>
                     <button onClick={goToFeedPage}>Voltar para Página dos Feeds</button>                
                 </div>                    
             </Post>
