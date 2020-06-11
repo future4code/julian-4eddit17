@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const CreatePostContainer = styled.div`
 background-color: #BAB5A4;
@@ -9,21 +10,57 @@ background-color: #BAB5A4;
   padding: 15px;
   text-align: center;  
 `
+const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit'
 
 const FormCreateNewPost = (props) => {
+  const [ text, setText ] = useState('')
+  const [ title, setTitle ] = useState('')
+
+  const handleLogin = async () => {
+    const body = {
+      text: text,
+      title: title,
+    }
+    console.log('body',handleLogin)
+    try {
+      const response = await axios.post(`${baseUrl}/posts`, body ,{
+        headers: {
+          Authorization:localStorage.getItem("token")
+        }
+      });
+
+      //localStorage.setItem('token',response.data.token);
+      console.log(response.data);
+      
+    } catch(e) {
+      alert('Usuario não encontrado :(')
+    };
+  }
+  const handleSubmit = event => {
+    event.preventDefault();    
+  }
   return (
     <CreatePostContainer>
-        <label>Create a post</label>
+       <form onSubmit={handleSubmit}>
         <input
+          value={title}
+          placeholder='Title'
+          onChange={e => setTitle(e.target.value)}
           type='text'
-          placeholder='Title'          
+          required          
         />
         <textarea
-          rows="4" cols="30"
-          placeholder='Text'
-        />
+          value={text}
+          rows="4"
+          cols="30"
+          placeholder='Crie seu post aqui'
+          onChange={e => setText(e.target.value)}
+          type='text'
+          required          
+        /> 
         <button onClick={props.goToTitleCreatePost}>CANCEL</button>
-        <button>POST</button>
+        <button onClick={ handleLogin }>POST</button>       
+      </form>          
     </CreatePostContainer>
     
     
