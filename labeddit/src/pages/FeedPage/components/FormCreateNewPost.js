@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
+
 const CreatePostContainer = styled.div`
 background-color: #BAB5A4;
   width: 20%;

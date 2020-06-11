@@ -1,70 +1,86 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+import axios from 'axios'
 import CreatePost from './components/CreatPost';
 import FormCreateNewPost from './components/FormCreateNewPost';
 
-const Post = styled.div`
-  width: 50%;
-  height: 50%;
-  margin: 0 auto;
-  border-radius: 8px;
-  border: 1px solid #c3c3c3;
-  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.15);
-  display: flex;
-  padding: 15px;
-  text-align: center;  
-`
+const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts'
 
-const FeedPage = () => {  
-  const [selectedArea, setSelectedAre] = useState(false) 
+const FeedPage = () => {
+    const HomePage = useHistory(); 
+    const PostPage = useHistory(); 
+    const [getPost, setGetPost] = useState([])
+    const [selectedArea,setSelectedAre] = useState(false)
 
-  const HomePage = useHistory(); 
-  const PostPage = useHistory();    
+    useEffect(() => {
+      const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
+      if(token === null){
+        HomePage.push("/")
+      }
+    },[HomePage]);
 
-    if(token === null){
-      HomePage.push("/")
+    const goToHomePage = () => {
+        HomePage.push("/")
+    };
+    const goToPostPage = () => {
+    PostPage.push("/feed-page/post")
+    }; 
+
+    useEffect(() => {
+      axios.get(`${baseUrl}`, {
+        headers:{
+          Authorization: localStorage.getItem('token')
+        }
+      })
+      .then(response=>{
+        localStorage.getItem('token')
+
+        setGetPost(response.data.posts)
+
+        console.log(response.data.posts)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },[])
+
+    const createNewPostArea = () => {
+      switch(selectedArea) {
+        case false: 
+          return <CreatePost goToAreaOfNewPost={goToAreaOfNewPost}/>
+        case true:
+          return <FormCreateNewPost goToTitleCreatePost={goToTitleCreatePost}/> 
+        default:
+          return <CreatePost/>
+      }
     }
-  },[HomePage]);
-  
-  const goToHomePage = () => {
-      HomePage.push("/")
-  };
-  const goToPostPage = () => {
-  PostPage.push("/feed-page/post")
-  };
-  
-  const createNewPostArea = () => {
-    switch(selectedArea) {
-      case false: 
-        return <CreatePost goToAreaOfNewPost={goToAreaOfNewPost}/>     
-      case true:
-        return <FormCreateNewPost goToTitleCreatePost={goToTitleCreatePost}/> 
-      default:
-        return <CreatePost/>    
+    const goToAreaOfNewPost = () => {
+      setSelectedAre(true)
     }
-  }
-  const goToAreaOfNewPost = () => {
-    setSelectedAre(true)
-  }    
-  const goToTitleCreatePost = () => {
-    setSelectedAre(false)
-  }
-  
+    const goToTitleCreatePost = () => {
+      setSelectedAre(false)
+    }
+
   return (
     <div>
-        <h2>Página de Feed</h2>
-        <h3 >Criar post</h3>
+      {/* ToDO fazer card para o texto e o titulo */}
+        <h2>Página de Feed</h2> 
         {createNewPostArea()}
+        {getPost.map(post =>{
+            return(
+              <div>
+                <h1> {post.title} </h1>
+                <p> {post.text} </p>
+              </div>
+            )
+          })}
      <button onClick={goToHomePage}>Sair</button>
 
-     <Post>
-         post
+     <div>
+
          <button onClick={goToPostPage}>Abrir Post</button>
-     </Post>
+     </div>
 
     </div>
   );
