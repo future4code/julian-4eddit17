@@ -16,11 +16,6 @@ const Post = styled.div`
   `
 
 
-const PostPage = () => {
-    const HomePage = useHistory();
-    const FeedPage = useHistory(); 
-      
-
 
 const PostPage = () => { 
 

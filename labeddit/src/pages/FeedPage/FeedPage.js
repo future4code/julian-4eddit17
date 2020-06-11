@@ -85,7 +85,7 @@ const FeedPage = () => {
          <button onClick={goToPostPage}>Abrir Post</button>
      </div>
 
-    </Container>
+    </div>
   );
 }
 
