@@ -4,8 +4,6 @@ import axios from 'axios'
 import CreatePost from './components/CreatPost';
 import FormCreateNewPost from './components/FormCreateNewPost';
 
-
-
 const FeedPage = () => {
     const HomePage = useHistory(); 
     const PostPage = useHistory(); 
@@ -85,7 +83,7 @@ const FeedPage = () => {
          <button onClick={goToPostPage}>Abrir Post</button>
      </div>
 
-    </Container>
+    </div>
   );
 }
 

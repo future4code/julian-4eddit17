@@ -14,14 +14,6 @@ const Post = styled.div`
   padding: 15px;
   text-align: center;
   `
-
-
-const PostPage = () => {
-    const HomePage = useHistory();
-    const FeedPage = useHistory(); 
-      
-
-
 const PostPage = () => { 
 
     const HomePage = useHistory();
