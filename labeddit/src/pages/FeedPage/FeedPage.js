@@ -3,49 +3,79 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios'
 import CreatePost from './components/CreatPost';
 import FormCreateNewPost from './components/FormCreateNewPost';
+import CardPosts from './components/CardPosts'
+import styled from 'styled-components'
+
+
+/*Estilização*/
+const FeedPageWrapper = styled.div`
+  background-color: #faf6e9;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`
+const FeedPageTitle = styled.h1`
+  font-size: 50px;
+  font-family: 'Yeseva One', cursive;
+  color: black;
+`
+const ButtonDiv = styled.div`
+  bottom: 0;
+  right: 0;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  position: fixed; 
+`
+const Button = styled.button`
+  width:10vw;
+  background-color: #cf7500;
+  border-radius: 28px;
+  border: 1px solid #cf7500;
+  color: black;  
+  padding: 1rem 1rem;
+  text-align: center;
+  :hover {
+    color: #ece8d9;
+    transition: 1s;  
+  }
+`
+
+/*Estilização*/
 
 const FeedPage = () => {
-    const HomePage = useHistory(); 
-    const PostPage = useHistory(); 
-    const [getPost, setGetPost] = useState([])   
-    const [selectedArea,setSelectedAre] = useState(false)
-
+  const [getPost, setGetPost] = useState([])
+  const [selectedArea,setSelectedAre] = useState(false)
+    const HomePage = useHistory();      
+    
     useEffect(() => {
       const token = localStorage.getItem('token');
-  
+
       if(token === null){
         HomePage.push("/")
       }
     },[HomePage]);
 
-
     const goToHomePage = () => {
         HomePage.push("/")
-    };
-    const goToPostPage = () => {
-    PostPage.push("/feed-page/post")
     }; 
-
-    const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit/post'
+    
+    const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts'
     useEffect(() => {
       axios.get(`${baseUrl}`, {
-        
         headers:{
           Authorization: localStorage.getItem('token')
         }
       })
       .then(response=>{
         localStorage.getItem('token')
-
+        console.log('response',response.data.posts)
         setGetPost(response.data.posts)
 
-        console.log(response.data.posts)
       })
       .catch(err=>{
-        console.log(err)
+        console.log('errouuuu',err)
       })
     },[])
-
 
     const createNewPostArea = () => {
       switch(selectedArea) {
@@ -62,29 +92,21 @@ const FeedPage = () => {
     }
     const goToTitleCreatePost = () => {
       setSelectedAre(false)
-    }
-
+    }   
   return (
-    <div>
-      {/* ToDO fazer card para o texto e o titulo */}
-        <h2>Página de Feed</h2> 
+    <FeedPageWrapper>
+      {getPost.map((posts => {
+          return (
+            <CardPosts posts={posts}/>            
+          )
+        }))}        
+      <FeedPageTitle>Dashboard</FeedPageTitle>
         {createNewPostArea()}
-        {getPost.map(post =>{
-            return(
-              <div>
-                <h1> {post.title} </h1>
-                <p> {post.text} </p>
-              </div>
-            )
-          })}
-     <button onClick={goToHomePage}>Sair</button>
-
-     <div>
-         <button onClick={goToPostPage}>Abrir Post</button>
-     </div>
-
-    </div>
-  );
+      <ButtonDiv><Button onClick={goToHomePage}>homepage</Button></ButtonDiv>        
+      <CardPosts/>
+    </FeedPageWrapper>
+  )
 }
-
 export default FeedPage;
+
+
