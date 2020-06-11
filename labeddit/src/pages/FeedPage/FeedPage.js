@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { Post, Container } from '../../pages/FeedPage/style'
 import axios from 'axios'
 
-
 const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit'
 
 const FeedPage = () => {
@@ -11,7 +10,6 @@ const FeedPage = () => {
     const PostPage = useHistory(); 
     const [getPost, setGetPost] = useState([])   
 
-    console.log(getPost.title)
 
     useEffect(() => {
       const token = localStorage.getItem('token');
