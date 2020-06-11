@@ -161,6 +161,7 @@ const FeedPage = () => {
     <FeedPageWrapper>
       <FeedPageTitle>Dashboard</FeedPageTitle>
         {createNewPostArea()}
+
       <ButtonDiv><Button onClick={goToHomePage}>homepage</Button></ButtonDiv>
       {getPost.map((posts => {
         return (
