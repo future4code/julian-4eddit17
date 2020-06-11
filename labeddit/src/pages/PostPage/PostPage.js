@@ -14,9 +14,6 @@ const Post = styled.div`
   padding: 15px;
   text-align: center;
   `
-
-
-
 const PostPage = () => { 
 
     const HomePage = useHistory();
@@ -51,5 +48,8 @@ const PostPage = () => {
 
   );
 
+
+
+  /*comment de teste*/
 }
 export default PostPage;
