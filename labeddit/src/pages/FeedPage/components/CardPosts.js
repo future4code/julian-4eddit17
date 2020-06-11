@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
@@ -63,30 +63,26 @@ const CardPosts = (props) => {
     const putBaseURL = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts'
     const onClickGostei = () => {
     axios.put(`${putBaseURL}/:postId/vote`).then((
-            response => {console.log("Resposta: " + response)
-            localStorage.getItem('token')
-            }))
-        .catch(e => { console.log("ó o erro: " + e)})
+        response => {console.log("Resposta: " + response)
+        localStorage.getItem('token')
+        }))
+    .catch(e => { console.log("ó o erro: " + e)})
     }
-    const goToPostPage = () => {
-        //console.log('postId',posts.id)
+    const goToPostPage = () => {        
       PostPage.push("/feed-page/post")
       };
-    const posts = props.posts  
+    const postes = props.posts
+    console.log("postes",postes)
 
-    return (         
-            <div>           
-              <Post onClick={goToPostPage}>
-                <PostTitle>{posts.title}</PostTitle>
-                <PostText>{posts.text}</PostText>
-                <VoteButton onClick={onClickGostei}>👍</VoteButton>
-                <VoteButton>👎</VoteButton>
-                <PostButton onClick={goToPostPage}>+</PostButton>
-              </Post>
-          )
-        }))}                                 
-            </div>
-    );
-  /*comment de teste*/
+    return (                  
+        <Post onClick={goToPostPage}>
+          <PostTitle>impossível aff</PostTitle>
+          
+          <PostText></PostText>
+          <VoteButton onClick={onClickGostei}>👍</VoteButton>
+          <VoteButton>👎</VoteButton>
+          <PostButton onClick={goToPostPage}>+</PostButton>
+        </Post>       
+    );  
 }
 export default CardPosts;
