@@ -4,21 +4,22 @@ import axios from 'axios'
 import CreatePost from './components/CreatPost';
 import FormCreateNewPost from './components/FormCreateNewPost';
 
-const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts'
+
 
 const FeedPage = () => {
     const HomePage = useHistory(); 
     const PostPage = useHistory(); 
-    const [getPost, setGetPost] = useState([])
+    const [getPost, setGetPost] = useState([])   
     const [selectedArea,setSelectedAre] = useState(false)
 
     useEffect(() => {
       const token = localStorage.getItem('token');
-
+  
       if(token === null){
         HomePage.push("/")
       }
     },[HomePage]);
+
 
     const goToHomePage = () => {
         HomePage.push("/")
@@ -27,8 +28,10 @@ const FeedPage = () => {
     PostPage.push("/feed-page/post")
     }; 
 
+    const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit/post'
     useEffect(() => {
       axios.get(`${baseUrl}`, {
+        
         headers:{
           Authorization: localStorage.getItem('token')
         }
@@ -44,6 +47,7 @@ const FeedPage = () => {
         console.log(err)
       })
     },[])
+
 
     const createNewPostArea = () => {
       switch(selectedArea) {
@@ -78,11 +82,10 @@ const FeedPage = () => {
      <button onClick={goToHomePage}>Sair</button>
 
      <div>
-
          <button onClick={goToPostPage}>Abrir Post</button>
      </div>
 
-    </div>
+    </Container>
   );
 }
 
