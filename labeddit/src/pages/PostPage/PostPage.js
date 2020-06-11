@@ -13,7 +13,8 @@ const Post = styled.div`
   display: flex;
   padding: 15px;
   text-align: center;
-`
+  `
+
 
 const PostPage = () => {
     const HomePage = useHistory();
@@ -21,7 +22,12 @@ const PostPage = () => {
       
 
 
-    useEffect(() => {
+const PostPage = () => { 
+
+    const HomePage = useHistory();
+    const FeedPage = useHistory(); 
+
+  useEffect(() => {
         const token = localStorage.getItem('token');
     
         if(token === null){
@@ -42,7 +48,6 @@ const PostPage = () => {
             <h2>Página do Post</h2>
             <Post>
                 <div>
-
                     <button onClick={goToFeedPage}>Voltar para Página dos Feeds</button>                
                 </div>                    
             </Post>
@@ -50,6 +55,6 @@ const PostPage = () => {
         </div>  
 
   );
-}
 
+}
 export default PostPage;
