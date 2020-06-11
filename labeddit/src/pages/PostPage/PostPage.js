@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 
+
 const Post = styled.div`
   width: 50%;
   height: 50%;
@@ -13,11 +14,7 @@ const Post = styled.div`
   padding: 15px;
   text-align: center;
   
-`
 
-const PostPage = () => {
-    const HomePage = useHistory();
-    const FeedPage = useHistory();  
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -26,6 +23,7 @@ const PostPage = () => {
           HomePage.push("/")
         }
       },[HomePage])
+
 
     const goToHomePage = () => {
         HomePage.push("/")
@@ -39,9 +37,7 @@ const PostPage = () => {
             <h2>Página do Post</h2>
             <Post>
                 <div>
-                post post post post
-                </div>
-                <div>
+
                     <button onClick={goToFeedPage}>Voltar para Página dos Feeds</button>                
                 </div>                    
             </Post>
