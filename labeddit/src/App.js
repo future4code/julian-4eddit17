@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useContext} from 'react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import HomePage from './pages/HomePage/HomePage';
+import CreateProfilePage from './pages/CreateProfilePage/CreateProfilePage';
+import FeedPage from './pages/FeedPage/FeedPage';
+import PostPage from './pages/PostPage/PostPage';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+              <HomePage/>
+          </Route>
+          <Route exact path="/create-new-profile/">
+              <CreateProfilePage/>
+          </Route>
+          <Route exact path="/feed-page/">
+              <FeedPage/>
+          </Route>
+          <Route exact path="/feed-page/post">
+              <PostPage/>
+          </Route>
+        </Switch>
+    
+    </BrowserRouter>  
   );
 }
 
