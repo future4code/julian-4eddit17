@@ -5,6 +5,7 @@ import CreatePost from './components/CreatPost';
 import FormCreateNewPost from './components/FormCreateNewPost';
 import CardPosts from './components/CardPosts'
 import styled from 'styled-components'
+import AllPosts from './components/AllPosts';
 
 
 /*Estilização*/
@@ -92,10 +93,10 @@ const VoteButton = styled.button`
 const FeedPage = () => {
   const HomePage = useHistory(); 
   const PostPage = useHistory(); 
-  const [getPost, setGetPost] = useState([])
-  const [selectedArea,setSelectedAre] = useState(false)
   const [gostei, setGostei] = useState(true)
   const [nGostei, setNGostei] = useState(false)   
+  const [selectedArea,setSelectedAre] = useState(false)
+  const [getPost, setGetPost] = useState([])
   
   console.log('estado',getPost);
       
@@ -109,7 +110,8 @@ const FeedPage = () => {
 
     const goToHomePage = () => {
         HomePage.push("/")
-    };
+    };   
+
     const goToPostPage = () => {
       PostPage.push("/feed-page/post")
     }  
@@ -161,24 +163,17 @@ const FeedPage = () => {
     <FeedPageWrapper>
       <FeedPageTitle>Dashboard</FeedPageTitle>
         {createNewPostArea()}
-
-      <ButtonDiv><Button onClick={goToHomePage}>homepage</Button></ButtonDiv>
-      {getPost.map((posts => {
-        return (
-          <Post>
-            <PostTitle>{posts.title}</PostTitle>
-            <PostText>{posts.text}</PostText>
-            <VoteButton onClick={onClickGostei}>👍</VoteButton>
-            <VoteButton>👎</VoteButton>
-            <PostButton onClick={goToPostPage}>+</PostButton>
-          </Post>
-        )
-      }))}
+      <ButtonDiv>
+        <Button onClick={goToHomePage}>homepage</Button>
+      </ButtonDiv>
+      <AllPosts posts={getPost}/>      
       <div>
-        <button onClick={goToPostPage}>Abrir Post</button>
+        <button >Abrir Post</button>
       </div>
-      <CardPosts/>
-    </FeedPageWrapper>
-  )
-}
-export default FeedPage;    
+     
+      </FeedPageWrapper>
+        )
+      }
+      export default FeedPage;    
+
+      //<CardPosts posts={posts}/> <CardPosts/>

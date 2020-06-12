@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import axios from 'axios'
 import styled from 'styled-components'
 
 
@@ -15,9 +16,15 @@ const Post = styled.div`
   text-align: center;
   `
 const PostPage = () => { 
+  const [detail, setDetail] = useState ([])
+
+  console.log(detail)
 
     const HomePage = useHistory();
     const FeedPage = useHistory(); 
+
+    const params = useParams();
+    console.log('params',params)
 
   useEffect(() => {
         const token = localStorage.getItem('token');
@@ -34,6 +41,23 @@ const PostPage = () => {
     const goToFeedPage = () => {
     FeedPage.push("/feed-page/")
     }  
+    const baseUrl = `https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${params.id}`
+    useEffect(() => {
+      axios.get(`${baseUrl}`, {
+        headers:{
+          Authorization: localStorage.getItem('token')
+        }
+      })
+      .then(response=>{
+        localStorage.getItem('token')
+        console.log('response',response.data.post)
+        setDetail(response.data.post)
+
+      })
+      .catch(err=>{
+        console.log('errouuuu',err)
+      })
+    },[])
 
     return (    
         <div>
@@ -45,11 +69,6 @@ const PostPage = () => {
             </Post>
             <button onClick={goToHomePage}>Sair</button>
         </div>  
-
-  );
-
-
-
-  /*comment de teste*/
+  );  
 }
 export default PostPage;
