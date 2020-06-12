@@ -68,17 +68,24 @@ const CardPosts = (props) => {
         }))
     .catch(e => { console.log("ó o erro: " + e)})
     }
-    const goToPostPage = () => {        
-      PostPage.push("/feed-page/post")
-      };
-    const postes = props.posts
-    console.log("postes",postes)
+
+    const posts = props.posts
+    console.log("posts",posts)
+
+    const goToPostPage = () => { 
+      const id = posts.id
+      console.log('id', id)       
+      PostPage.push("/feed-page/post/"+id)
+    };
 
     return (                  
         <Post onClick={goToPostPage}>
-          <PostTitle>impossível aff</PostTitle>
+          <PostTitle>{posts.title}</PostTitle>
+
           
-          <PostText></PostText>
+
+          <PostText>{posts.text}</PostText>
+
           <VoteButton onClick={onClickGostei}>👍</VoteButton>
           <VoteButton>👎</VoteButton>
           <PostButton onClick={goToPostPage}>+</PostButton>

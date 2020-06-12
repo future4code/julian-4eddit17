@@ -18,11 +18,13 @@ const App = () => {
           <Route exact path="/feed-page/">
               <FeedPage/>
           </Route>
-          <Route exact path="/feed-page/post">
+          <Route exact path="/feed-page/post/:id">
               <PostPage/>
+          </Route>        
+          <Route path="/">
+            <div><h1> Error 404! Digite o endereço correto</h1></div>
           </Route>
         </Switch>
-    
     </BrowserRouter>  
   );
 }
