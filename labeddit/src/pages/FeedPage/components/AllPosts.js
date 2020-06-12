@@ -9,13 +9,9 @@ const CreatePostContainer = styled.div`
   padding: 15px;
   text-align: center;  
 `
-const H3 = styled.div`
-  background-color: #BAB5A4;
-`
-const AllPosts = (props) => {
 
-  const Allpostes = props.posts
-  console.log('Allpostes',Allpostes)
+const AllPosts = (props) => { 
+  
   return (
     <CreatePostContainer>
         {props.posts.map((posts) => {
