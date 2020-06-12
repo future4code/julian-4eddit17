@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios'
 import styled from 'styled-components'
+import AllComments from './components/AllComments';
 
 
 const Post = styled.div`
@@ -18,6 +19,7 @@ const Post = styled.div`
 const PostPage = () => {
 
   const [detail, setDetail] = useState ([])
+  const [comment, setComment] = useState ([])
 
   
 
@@ -52,8 +54,9 @@ const PostPage = () => {
       })
       .then(response=>{
         localStorage.getItem('token')
-        console.log('response comentarios',response.data.post)
+        console.log('response comentarios',response.data.post.comments)
         setDetail(response.data.post)
+        setComment(response.data.post.comments)
 
       })
       .catch(err=>{
@@ -73,11 +76,7 @@ const PostPage = () => {
                   <p>Votos: {detail.votesCount}</p>
                   <p>Usuario: {detail.username}</p>
                   <h3>Comentários: </h3>
-                  <p>faltam ser renderizados, tem que fazer um map ou algo parecido para isso acontecer
-                    isso esta sendo trabalhado
-                    em breve estara finalizado.</p>
-                  <p></p>
-                  <p></p>
+                  <AllComments comments={comment}/>
                 </div>                    
             </Post>
             <button onClick={goToFeedPage}>Voltar para Página dos Feeds</button>                
