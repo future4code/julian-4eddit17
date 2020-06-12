@@ -19,11 +19,7 @@ const Post = styled.div`
 const PostPage = () => {
 
   const [detail, setDetail] = useState ([])
-  const [comment, setComment] = useState ([])
-
-  
-
-  
+  const [comment, setComment] = useState ([])  
 
     const HomePage = useHistory();
     const FeedPage = useHistory(); 
