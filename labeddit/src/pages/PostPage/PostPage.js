@@ -19,7 +19,9 @@ const PostPage = () => {
 
   const [detail, setDetail] = useState ([])
 
-  console.log(detail)
+  
+
+  
 
     const HomePage = useHistory();
     const FeedPage = useHistory(); 
@@ -57,16 +59,26 @@ const PostPage = () => {
       .catch(err=>{
         console.log('errouuuu',err)
       })
-    },[])
+    },[]);
 
     return (    
         <div>
             <h2>Página do Post</h2>
             <Post>
                 <div>
-                    <button onClick={goToFeedPage}>Voltar para Página dos Feeds</button>                
+                  <p></p>
+                  <p>Titulo: {detail.title}</p>
+                  <p>Texto: {detail.text}</p>
+                  <p>Comentários: {detail.commentsCount}</p>
+                  <p>Votos: {detail.votesCount}</p>
+                  <p>Usuario: {detail.username}</p>
+                  <h3>Comentários: </h3>
+                  <p>faltam ser renderizados, tem que fazer um map ou algo parecido para isso acontecer.</p>
+                  <p></p>
+                  <p></p>
                 </div>                    
             </Post>
+            <button onClick={goToFeedPage}>Voltar para Página dos Feeds</button>                
             <button onClick={goToHomePage}>Sair</button>
         </div>  
   );  

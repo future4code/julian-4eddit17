@@ -70,7 +70,7 @@ const CardPosts = (props) => {
     }
 
     const posts = props.posts
-    
+    console.log('post aqui', posts)
 
     const goToPostPage = () => { 
       const id = posts.id          
@@ -83,6 +83,8 @@ const CardPosts = (props) => {
           <PostText>{posts.text}</PostText>
           <VoteButton onClick={onClickGostei}>👍</VoteButton>
           <VoteButton>👎</VoteButton>
+          <p>Comentarios: {posts.commentsCount}</p>
+          <p>Votos: {posts.votesCount}</p>
           <PostButton onClick={goToPostPage}>+</PostButton>
         </Post>       
     );  
