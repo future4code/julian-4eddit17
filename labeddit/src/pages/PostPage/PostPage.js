@@ -73,7 +73,9 @@ const PostPage = () => {
                   <p>Votos: {detail.votesCount}</p>
                   <p>Usuario: {detail.username}</p>
                   <h3>Comentários: </h3>
-                  <p>faltam ser renderizados, tem que fazer um map ou algo parecido para isso acontecer.</p>
+                  <p>faltam ser renderizados, tem que fazer um map ou algo parecido para isso acontecer
+                    isso esta sendo trabalhado
+                    em breve estara finalizado.</p>
                   <p></p>
                   <p></p>
                 </div>                    
