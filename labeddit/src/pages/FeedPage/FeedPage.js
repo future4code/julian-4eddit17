@@ -98,7 +98,7 @@ const FeedPage = () => {
   const [selectedArea,setSelectedAre] = useState(false)
   const [getPost, setGetPost] = useState([])
   
-  console.log('estado',getPost);
+  
       
     useEffect(() => {
       const token = localStorage.getItem('token');
@@ -110,11 +110,7 @@ const FeedPage = () => {
 
     const goToHomePage = () => {
         HomePage.push("/")
-    };   
-
-    const goToPostPage = () => {
-      PostPage.push("/feed-page/post")
-    }  
+    };     
     
     const baseUrl = 'https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts'
     useEffect(() => {
@@ -176,4 +172,4 @@ const FeedPage = () => {
       }
       export default FeedPage;    
 
-      //<CardPosts posts={posts}/> <CardPosts/>
+      

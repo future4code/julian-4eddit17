@@ -15,7 +15,8 @@ const Post = styled.div`
   padding: 15px;
   text-align: center;
   `
-const PostPage = () => { 
+const PostPage = () => {
+
   const [detail, setDetail] = useState ([])
 
   console.log(detail)
@@ -23,8 +24,7 @@ const PostPage = () => {
     const HomePage = useHistory();
     const FeedPage = useHistory(); 
 
-    const params = useParams();
-    console.log('params',params)
+    const params = useParams();    
 
   useEffect(() => {
         const token = localStorage.getItem('token');
@@ -50,7 +50,7 @@ const PostPage = () => {
       })
       .then(response=>{
         localStorage.getItem('token')
-        console.log('response',response.data.post)
+        console.log('response comentarios',response.data.post)
         setDetail(response.data.post)
 
       })

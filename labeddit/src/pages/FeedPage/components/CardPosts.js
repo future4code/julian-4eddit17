@@ -70,22 +70,17 @@ const CardPosts = (props) => {
     }
 
     const posts = props.posts
-    console.log("posts",posts)
+    
 
     const goToPostPage = () => { 
-      const id = posts.id
-      console.log('id', id)       
+      const id = posts.id          
       PostPage.push("/feed-page/post/"+id)
     };
 
     return (                  
         <Post onClick={goToPostPage}>
-          <PostTitle>{posts.title}</PostTitle>
-
-          
-
+          <PostTitle>{posts.title}</PostTitle>  
           <PostText>{posts.text}</PostText>
-
           <VoteButton onClick={onClickGostei}>👍</VoteButton>
           <VoteButton>👎</VoteButton>
           <PostButton onClick={goToPostPage}>+</PostButton>
