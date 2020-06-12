@@ -19,8 +19,8 @@ font-size: 50px;
   width: 100%;
         :hover
             {
-                   /*Ainda to pensando em algumas animações pra 
-                   colocar aqui*/
+                  color: ghostwhite;
+                   transition: 2s;
             }
 `
 const CommentTitle = styled.h3`
@@ -30,8 +30,8 @@ const CommentTitle = styled.h3`
   width: 100%;
         :hover
             {
-                   /*Ainda to pensando em algumas animações pra 
-                   colocar aqui*/
+                   color: ghostwhite;
+                   transition: 2s;
             }
 `
 const Post = styled.div`
