@@ -2,97 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios'
 import styled from 'styled-components'
+import AllComments from './components/AllComments';
 
-const PageWrapper = styled.div`
-  display:grid;
-  margin-left: auto;
-  margin-right: auto;  
-  text-align: center;
-  background-color: #faf6e9;
-  margin:0;  
-  height:auto;
-`
-const PageTitle = styled.h1`
-font-size: 50px;
-  font-family: 'Yeseva One', cursive;
-  color: black;
-  width: 100%;
-        :hover
-            {
-                  color: ghostwhite;
-                   transition: 2s;
-            }
-`
-const CommentTitle = styled.h3`
-  font-size: 20px;
-  font-family: 'Yeseva One', cursive;
-  color: black;
-  width: 100%;
-        :hover
-            {
-                   color: ghostwhite;
-                   transition: 2s;
-            }
-`
+
 const Post = styled.div`
   width: 50%;
+  height: 50%;
   margin: 0 auto;
   border-radius: 8px;
   border: 1px solid #c3c3c3;
   box-shadow: 0 2px 7px 0 rgba(0,0,0,0.15);
   display: flex;
-  flex-direction: column;
   padding: 15px;
-      :hover{
-              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
-              transition: 3s;
-              border-radius: 100px;
-              background-color: #ece8d9;
-            }
+  text-align: center;
   `
-const CommentFormatter = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-`
-const CommentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-const FeedPageButton = styled.div`
-  width:10vw;
-  background-color: #cf7500;
-  border-radius: 28px;
-  border: 1px solid #cf7500;
-  color: black;  
-  padding: 1rem 1rem;
-  margin: auto;  
-  :hover {
-    color: #ece8d9;
-    transition: 1s;  
-  }
-`
-const LogoutButton = styled.div`
-  width:10vw;
-  background-color: #cf7500;
-  border-radius: 28px;
-  border: 1px solid #cf7500;
-  color: black;  
-  padding: 1rem 1rem;
-  margin: auto;  
-  :hover {
-    color: #ece8d9;
-    transition: 1s;  
-  }
-`
-const FeedButtonWrapper = styled.div`
-  margin-bottom: 5px;
-`
 const PostPage = () => {
 
   const [detail, setDetail] = useState ([])
-  const [comment, setComment] = useState ([])
-  
+  const [comment, setComment] = useState ([])  
+
     const HomePage = useHistory();
     const FeedPage = useHistory(); 
 
@@ -122,41 +50,34 @@ const PostPage = () => {
       })
       .then(response=>{
         localStorage.getItem('token')
-        console.log('Acessando conteúdo do post:',response.data.post)
+        console.log('response comentarios',response.data.post.comments)
         setDetail(response.data.post)
-        console.log('Acessando os comentários do post: ', response.data.post.comments)
         setComment(response.data.post.comments)
 
       })
       .catch(err=>{
-        console.log('LOG: ',err)
+        console.log('errouuuu',err)
       })
     },[]);
 
     return (    
-        <PageWrapper>
-            <PageTitle>Página do Post</PageTitle>
+        <div>
+            <h2>Página do Post</h2>
             <Post>
-                    <p>Titulo: {detail.title}</p>
-                    <p>Texto: {detail.text}</p>
-                    <p>Comentários: {detail.commentsCount}</p>
-                    <p>Votos: {detail.votesCount}</p>
-                    <p>Usuario: {detail.username}</p>
-                    <CommentTitle>Comentários: </CommentTitle>
-                    {comment.map((comments => {
-                        return (
-                                  <CommentWrapper>
-                                    <CommentFormatter>
-                                      <h4>{comments.username}</h4>
-                                      <p>{comments.text}</p>
-                                      <p>{comments.votesCount}</p>
-                                    </CommentFormatter>
-                                  </CommentWrapper>
-                              )}))}                 
+                <div>
+                  <p></p>
+                  <p>Titulo: {detail.title}</p>
+                  <p>Texto: {detail.text}</p>
+                  <p>Comentários: {detail.commentsCount}</p>
+                  <p>Votos: {detail.votesCount}</p>
+                  <p>Usuario: {detail.username}</p>
+                  <h3>Comentários: </h3>
+                  <AllComments comments={comment}/>
+                </div>                    
             </Post>
-            <FeedButtonWrapper>  <FeedPageButton onClick={goToFeedPage}>feedpage</FeedPageButton> </FeedButtonWrapper>
-            <LogoutButton onClick={goToHomePage}>logout</LogoutButton> 
-        </PageWrapper>  
+            <button onClick={goToFeedPage}>Voltar para Página dos Feeds</button>                
+            <button onClick={goToHomePage}>Sair</button>
+        </div>  
   );  
 }
 export default PostPage;
